@@ -1,0 +1,76 @@
+from fpdf import FPDF
+
+# Create a subclass that can use Unicode fonts
+class PDF(FPDF):
+    pass
+
+pdf = PDF()
+pdf.add_page()
+# Add a Unicode font that supports a wide range of characters (ensure the .ttf file is in your working directory)
+pdf.add_font('DejaVu', '', 'DejaVuSans.ttf', uni=True)
+
+# Use the new font for all text
+pdf.set_font('DejaVu', '', 20)
+pdf.cell(200, 10, "THE INDUSTRIAL SCOURGE STRIKES AGAIN!", ln=True, align='C')
+
+# Subheading
+pdf.set_font('DejaVu', '', 14)
+pdf.cell(200, 10, "Smog Reaper Declares War on Humanity's Coal Addiction", ln=True, align='C')
+pdf.ln(5)
+
+# Author and date
+pdf.set_font('DejaVu', '', 12)
+pdf.cell(200, 10, "By [Your Name] | February 2025", ln=True, align='C')
+pdf.ln(5)
+
+# Main article text
+pdf.set_font('DejaVu', '', 12)
+main_text = (
+    "The world is in chaos as the villainous Smog Reaper, a monstrous embodiment of coal itself, "
+    "has emerged from the depths of the Earth, waging war on humanity for its relentless dependence on fossil fuels. "
+    "Cities have been shrouded in choking smog, rivers run black with soot, and the air is thick with the stench of burning coal."
+)
+pdf.multi_cell(0, 8, main_text)
+pdf.ln(5)
+
+# Impact of Coal Section
+pdf.set_font('DejaVu', '', 14)
+pdf.cell(0, 10, "I – Impact of Coal: The Environmental Catastrophe", ln=True)
+pdf.ln(2)
+pdf.set_font('DejaVu', '', 12)
+impact_text = (
+    "- Major Carbon Contributor: Coal-burning power plants produce over 40% of global carbon dioxide emissions, the primary driver of climate change.\n"
+    "- Air Pollution & Health Risks: Fine particulate matter from coal causes millions of premature deaths each year.\n"
+    "- Water Contamination: Coal mining releases toxic chemicals like mercury and arsenic into waterways.\n"
+    "- Deforestation & Habitat Loss: Coal extraction destroys forests and landscapes, endangering countless species.\n"
+    "- Acid Rain & Soil Degradation: Sulfur dioxide emissions from coal create acid rain that weakens ecosystems."
+)
+pdf.multi_cell(0, 8, impact_text)
+pdf.ln(5)
+
+# Counteracting the Crisis Section
+pdf.set_font('DejaVu', '', 14)
+pdf.cell(0, 10, "C – Counteracting the Crisis: The Path to Redemption", ln=True)
+pdf.ln(2)
+pdf.set_font('DejaVu', '', 12)
+solutions_text = (
+    "- Transition to Renewable Energy: Investing in solar, wind, and hydroelectric power.\n"
+    "- Energy Efficiency Improvements: Upgrading power grids and buildings to cut energy waste.\n"
+    "- Stronger Regulations & Carbon Pricing: Governments must enforce stricter emission controls.\n"
+    "- Reforestation & Carbon Capture: Planting trees and developing carbon capture technologies.\n"
+    "- Public Awareness & Action: Citizens can push for green policies and reduce energy consumption."
+)
+pdf.multi_cell(0, 8, solutions_text)
+pdf.ln(5)
+
+# Closing statement
+pdf.set_font('DejaVu', '', 12)
+pdf.set_font('DejaVu', 'I', 12)
+closing_text = (
+    "Can humanity outwit the Smog Reaper before it's too late? Or will coal-fueled destruction continue unchecked?\n"
+    "Stay tuned for updates as this catastrophe unfolds."
+)
+pdf.multi_cell(0, 8, closing_text)
+
+# Save PDF to file (adjust the path as needed)
+pdf.output("Smog_Reaper_Newspaper.pdf", 'F')
